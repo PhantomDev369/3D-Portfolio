@@ -1,0 +1,11 @@
+{
+    title: 'UI/UX Designer',
+    company_name: 'Self Employed',
+    date: '2024 - Present',
+    details: [
+      "As a passionate UI/UX Designer, I focus on creating visually appealing and user-friendly interfaces that enhance digital experiences. My design philosophy revolves around usability, accessibility, and aesthetics, ensuring that every product not only looks great but also functions seamlessly.",
+      "I specialize in:",
+       "<ol><li>✅ User-Centered Design – Understanding user needs to create intuitive interfaces.</li> <li> ✅ Wireframing & Prototyping – Bringing ideas to life with interactive prototypes.</li> <li> ✅ Responsive & Modern UI – Designing adaptable layouts for all devices.</li> <li>✅ User Research & Testing – Improving designs through feedback and data-driven decisions.</li></ol>",
+      "Every design I create aims to bridge the gap between functionality and creativity, delivering meaningful interactions that leave a lasting impression."
+    ],
+  },
