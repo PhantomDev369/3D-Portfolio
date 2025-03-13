@@ -33,7 +33,7 @@ const experiences = [
   {
     title: 'Web Developer',
     company_name: 'Self Employed',
-    date: '2023 - Present',
+    date: '2024 - Present',
     details: [
       'Building Scalable & Modern Web Solutions',
       'I specialize in developing high-performance web applications with clean, efficient code.',
