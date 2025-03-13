@@ -1,43 +1,52 @@
-import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import React, { useEffect, useState } from "react";
 
-import { experiences } from '../data';
-import { SectionWrapper } from '../hoc';
-import { styles } from '../styles';
-import { textVariant } from '../utils/motion';
+import { experiences } from "../data";
+import { SectionWrapper } from "../hoc";
+import { styles } from "../styles";
+import { textVariant, fade } from "../utils/motion";
 
 const ExperienceCard = ({ experience, onClick, isActive, isMobile }) => {
   return (
-    <div
+    <motion.div
       onClick={onClick}
       className={`cursor-pointer sm:mb-5 p-5 max-w-xl relative sm:text-left text-center ${
-        isMobile ? 'text-quaternary' : ''
+        isMobile ? "text-quaternary" : ""
       }`}
     >
       {(isActive || isMobile) && (
-        <div className="absolute left-0 top-0 bottom-0 w-3 md:w-5 bg-tertiary my-6 sm:block hidden"></div>
+        <motion.div
+          layoutId="tag"
+          className="absolute left-0 top-0 bottom-0 w-3 md:w-5 bg-tertiary my-6 sm:block hidden"
+        ></motion.div>
       )}
       <h3
         className={`text-xl lg:text-2xl xl:text-3xl font-bold sm:pl-8 ${
-          isActive || isMobile ? 'text-quaternary' : 'text-slate-600'
+          isActive || isMobile ? "text-quaternary" : "text-slate-600"
         }`}
       >
         {experience.title}
       </h3>
       <p
         className={`text-md lg:text-lg xl:text-2xl sm:font-medium pt-2 sm:pl-8 ${
-          isActive || isMobile ? 'text-white' : 'text-slate-600'
+          isActive || isMobile ? "text-white" : "text-slate-600"
         }`}
       >
         {experience.company_name} | {experience.date}
       </p>
-    </div>
+    </motion.div>
   );
 };
 
 const ExperienceDetails = ({ experience }) => {
   return (
-    <div className="mt-5">
+    <motion.div
+      initial={fade.initial}
+      animate={fade.animate}
+      exit={fade.exit}
+      className="mt-5"
+      layoutId="cardDetail"
+    >
       <ul className="max-w-7xl list-none space-y-8 border-4 lg:border-8 rounded-xl lg:rounded-3xl p-6">
         {experience.details.map((detail, index) => (
           <li
@@ -47,7 +56,7 @@ const ExperienceDetails = ({ experience }) => {
           />
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 };
 
@@ -61,10 +70,10 @@ const Experience = () => {
     };
 
     handleResize(); // Check initial screen size
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -75,7 +84,7 @@ const Experience = () => {
       </motion.div>
 
       <div className="relative mt-10 md:mt-20 md:p-20 flex flex-col items-center sm:flex-row sm:items-start">
-        <div className="flex flex-col z-10 sm:w-auto sm:w-full">
+        <div className="flex flex-col z-10 sm:w-full">
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={`experience-${index}`}
@@ -88,11 +97,18 @@ const Experience = () => {
         </div>
 
         <div className="flex justify-end z-10 sm:block hidden">
-          <ExperienceDetails experience={selectedJob} />
+          <AnimatePresence mode="wait">
+            {experiences.map(
+              (exp, i) =>
+                selectedJob === exp && (
+                  <ExperienceDetails key={i} experience={exp} />
+                )
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>
   );
 };
 
-export default SectionWrapper(Experience, 'portfolio');
+export default SectionWrapper(Experience, "portfolio");
